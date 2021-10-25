@@ -1,6 +1,4 @@
-package com.example.hellogit;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.example.hellogit.utils;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,8 +6,10 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
-import com.example.hellogit.MainActivity;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.hellogit.R;
+import com.example.hellogit.activities.MainActivity;
 
 public class Splash extends AppCompatActivity {
 private ImageView iv;
