@@ -10,6 +10,4 @@ public class ApiEndpoint {
     public static String MOVIE_POPULAR = "discover/movie?";
     public static String URLIMAGE = "https://image.tmdb.org/t/p/w780/";
     public static String URLFILM = "https://www.themoviedb.org/movie/";
-    public static String NOTIF_DATE = "&primary_release_date.gte=";
-    public static String REALESE_DATE = "&primary_release_date.lte=";
 }
