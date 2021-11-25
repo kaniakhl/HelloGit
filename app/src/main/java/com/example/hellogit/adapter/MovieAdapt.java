@@ -15,15 +15,15 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.hellogit.R;
-import com.example.hellogit.model.ModelMovie;
-import com.example.hellogit.networking.ApiEndpoint;
+import com.example.hellogit.ModelMovie;
+import com.example.hellogit.ApiEndpoint;
 
 import java.util.List;
 
-public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> {
+public class MovieAdapt extends RecyclerView.Adapter<MovieAdapt.ViewHolder> {
 
     private List<ModelMovie> items;
-    private MovieAdapter.onSelectData onSelectData;
+    private MovieAdapt.onSelectData onSelectData;
     private Context mContext;
     private double Rating;
 
@@ -31,7 +31,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         void onSelected(ModelMovie modelMovie);
     }
 
-    public MovieAdapter(Context context, List<ModelMovie> items, MovieAdapter.onSelectData xSelectData) {
+    public MovieAdapt(Context context, List<ModelMovie> items, MovieAdapt.onSelectData xSelectData) {
         this.mContext = context;
         this.items = items;
         this.onSelectData = xSelectData;
@@ -47,7 +47,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
     public void onBindViewHolder(ViewHolder holder, int position) {
         final ModelMovie data = items.get(position);
 
-        Rating = data.getVoteAverage();
+        Rating = data.getVoteAvg();
         holder.tvTitle.setText(data.getTitle());
         holder.tvRealeseDate.setText(data.getReleaseDate());
         holder.tvDesc.setText(data.getOverview());

@@ -8,7 +8,7 @@ import androidx.core.view.ViewCompat;
 import com.gauravk.bubblenavigation.BubbleNavigationLinearView;
 
 
-public class BottomBarBehavior extends CoordinatorLayout.Behavior<BubbleNavigationLinearView> {
+public class NavBarBehavior extends CoordinatorLayout.Behavior<BubbleNavigationLinearView> {
 
     private int height;
 

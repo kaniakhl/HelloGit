@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activities.DetailMovieActivity" />
+        <activity android:name=".activities.DetailActivity" />
         <activity
             android:name=".utils.Splash"
             android:exported="true">

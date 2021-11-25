@@ -12,9 +12,9 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.Fragment;
 
 import com.example.hellogit.R;
-import com.example.hellogit.fragment.FragmentFavorite;
-import com.example.hellogit.fragment.FragmentMovie;
-import com.example.hellogit.utils.BottomBarBehavior;
+import com.example.hellogit.fragment.FragFav;
+import com.example.hellogit.fragment.FragMovie;
+import com.example.hellogit.utils.NavBarBehavior;
 import com.gauravk.bubblenavigation.BubbleNavigationLinearView;
 import com.gauravk.bubblenavigation.listener.BubbleNavigationChangeListener;
 
@@ -40,19 +40,19 @@ public class MainActivity extends AppCompatActivity {
         BubbleNavigationLinearView navigationBar = findViewById(R.id.navigationBar);
 
         CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams) navigationBar.getLayoutParams();
-        layoutParams.setBehavior(new BottomBarBehavior());
+        layoutParams.setBehavior(new NavBarBehavior());
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, new FragmentMovie()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, new FragMovie()).commit();
 
         navigationBar.setNavigationChangeListener(new BubbleNavigationChangeListener() {
             @Override
             public void onNavigationChanged(View view, int position) {
                 switch (position) {
                     case 0:
-                        fragment = new FragmentMovie();
+                        fragment = new FragMovie();
                         break;
                     case 1:
-                        fragment = new FragmentFavorite();
+                        fragment = new FragFav();
                         break;
                 }
                 getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, fragment).commit();

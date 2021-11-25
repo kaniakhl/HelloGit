@@ -19,10 +19,10 @@ import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.example.hellogit.R;
-import com.example.hellogit.activities.DetailMovieActivity;
-import com.example.hellogit.adapter.MovieAdapter;
-import com.example.hellogit.model.ModelMovie;
-import com.example.hellogit.networking.ApiEndpoint;
+import com.example.hellogit.activities.DetailActivity;
+import com.example.hellogit.adapter.MovieAdapt;
+import com.example.hellogit.ModelMovie;
+import com.example.hellogit.ApiEndpoint;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -33,16 +33,15 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FragmentMovie extends Fragment implements MovieAdapter.onSelectData {
+public class FragMovie extends Fragment implements MovieAdapt.onSelectData {
 
     private RecyclerView  rvFilmRecommend;
-    private MovieAdapter movieAdapter;
+    private MovieAdapt movieAdapt;
     private ProgressDialog progressDialog;
-    private SearchView searchFilm;
-    private List<ModelMovie> moviePlayNow = new ArrayList<>();
+    private SearchView search;
     private List<ModelMovie> moviePopular = new ArrayList<>();
 
-    public FragmentMovie() {
+    public FragMovie() {
     }
 
     @Override
@@ -56,9 +55,9 @@ public class FragmentMovie extends Fragment implements MovieAdapter.onSelectData
 
 
 
-        searchFilm = rootView.findViewById(R.id.searchFilm);
-        searchFilm.setQueryHint(getString(R.string.search_film));
-        searchFilm.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        search = rootView.findViewById(R.id.searchFilm);
+        search.setQueryHint(getString(R.string.search_film));
+        search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 setSearchMovie(query);
@@ -73,9 +72,9 @@ public class FragmentMovie extends Fragment implements MovieAdapter.onSelectData
             }
         });
 
-        int searchPlateId = searchFilm.getContext().getResources()
+        int searchPlateId = search.getContext().getResources()
                 .getIdentifier("android:id/search_plate", null, null);
-        View searchPlate = searchFilm.findViewById(searchPlateId);
+        View searchPlate = search.findViewById(searchPlateId);
         if (searchPlate != null) {
             searchPlate.setBackgroundColor(Color.TRANSPARENT);
         }
@@ -112,7 +111,7 @@ public class FragmentMovie extends Fragment implements MovieAdapter.onSelectData
 
                                 dataApi.setId(jsonObject.getInt("id"));
                                 dataApi.setTitle(jsonObject.getString("title"));
-                                dataApi.setVoteAverage(jsonObject.getDouble("vote_average"));
+                                dataApi.setVoteAvg(jsonObject.getDouble("vote_average"));
                                 dataApi.setOverview(jsonObject.getString("overview"));
                                 dataApi.setReleaseDate(formatter.format(dateFormat.parse(datePost)));
                                 dataApi.setPosterPath(jsonObject.getString("poster_path"));
@@ -156,7 +155,7 @@ public class FragmentMovie extends Fragment implements MovieAdapter.onSelectData
 
                                 dataApi.setId(jsonObject.getInt("id"));
                                 dataApi.setTitle(jsonObject.getString("title"));
-                                dataApi.setVoteAverage(jsonObject.getDouble("vote_average"));
+                                dataApi.setVoteAvg(jsonObject.getDouble("vote_average"));
                                 dataApi.setOverview(jsonObject.getString("overview"));
                                 dataApi.setReleaseDate(formatter.format(dateFormat.parse(datePost)));
                                 dataApi.setPosterPath(jsonObject.getString("poster_path"));
@@ -181,14 +180,14 @@ public class FragmentMovie extends Fragment implements MovieAdapter.onSelectData
 
 
     private void showMovie() {
-        movieAdapter = new MovieAdapter(getActivity(), moviePopular, this);
-        rvFilmRecommend.setAdapter(movieAdapter);
-        movieAdapter.notifyDataSetChanged();
+        movieAdapt = new MovieAdapt(getActivity(), moviePopular, this);
+        rvFilmRecommend.setAdapter(movieAdapt);
+        movieAdapt.notifyDataSetChanged();
     }
 
     @Override
     public void onSelected(ModelMovie modelMovie) {
-        Intent intent = new Intent(getActivity(), DetailMovieActivity.class);
+        Intent intent = new Intent(getActivity(), DetailActivity.class);
         intent.putExtra("detailMovie", modelMovie);
         startActivity(intent);
     }

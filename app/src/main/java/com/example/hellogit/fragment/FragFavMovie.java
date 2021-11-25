@@ -12,34 +12,34 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.hellogit.R;
-import com.example.hellogit.activities.DetailMovieActivity;
-import com.example.hellogit.adapter.MovieAdapter;
-import com.example.hellogit.model.ModelMovie;
-import com.example.hellogit.realm.RealmHelper;
+import com.example.hellogit.activities.DetailActivity;
+import com.example.hellogit.adapter.MovieAdapt;
+import com.example.hellogit.ModelMovie;
+import com.example.hellogit.RealmDB;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class FragmentFavoriteMovie extends Fragment implements MovieAdapter.onSelectData {
+public class FragFavMovie extends Fragment implements MovieAdapt.onSelectData {
 
     private RecyclerView rvMovieFav;
     private List<ModelMovie> modelMovie = new ArrayList<>();
-    private RealmHelper helper;
+    private RealmDB helper;
     private TextView txtNoData;
 
-    public FragmentFavoriteMovie() {
+    public FragFavMovie() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_favorite_film, container, false);
 
-        helper = new RealmHelper(getActivity());
+        helper = new RealmDB(getActivity());
 
         txtNoData = rootView.findViewById(R.id.tvNotFound);
         rvMovieFav = rootView.findViewById(R.id.rvMovieFav);
         rvMovieFav.setLayoutManager(new LinearLayoutManager(getActivity()));
-        rvMovieFav.setAdapter(new MovieAdapter(getActivity(), modelMovie, this));
+        rvMovieFav.setAdapter(new MovieAdapt(getActivity(), modelMovie, this));
         rvMovieFav.setHasFixedSize(true);
 
         setData();
@@ -55,13 +55,13 @@ public class FragmentFavoriteMovie extends Fragment implements MovieAdapter.onSe
         } else {
             txtNoData.setVisibility(View.GONE);
             rvMovieFav.setVisibility(View.VISIBLE);
-            rvMovieFav.setAdapter(new MovieAdapter(getActivity(), modelMovie, this));
+            rvMovieFav.setAdapter(new MovieAdapt(getActivity(), modelMovie, this));
         }
     }
 
     @Override
     public void onSelected(ModelMovie modelMovie) {
-        Intent intent = new Intent(getActivity(), DetailMovieActivity.class);
+        Intent intent = new Intent(getActivity(), DetailActivity.class);
         intent.putExtra("detailMovie", modelMovie);
         startActivity(intent);
     }

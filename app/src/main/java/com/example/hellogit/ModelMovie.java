@@ -1,4 +1,4 @@
-package com.example.hellogit.model;
+package com.example.hellogit;
 
 import java.io.Serializable;
 
@@ -9,7 +9,7 @@ public class ModelMovie extends RealmObject implements Serializable {
 
     private int Id;
     private String Title;
-    private double VoteAverage;
+    private double VoteAvg;
     private String Overview;
     private String ReleaseDate;
     private String PosterPath;
@@ -35,12 +35,12 @@ public class ModelMovie extends RealmObject implements Serializable {
         Title = title;
     }
 
-    public double getVoteAverage() {
-        return VoteAverage;
+    public double getVoteAvg() {
+        return VoteAvg;
     }
 
-    public void setVoteAverage(double voteAverage) {
-        VoteAverage = voteAverage;
+    public void setVoteAvg(double voteAvg) {
+        VoteAvg = voteAvg;
     }
 
     public String getOverview() {

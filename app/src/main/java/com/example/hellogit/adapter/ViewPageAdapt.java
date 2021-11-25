@@ -5,16 +5,16 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.example.hellogit.fragment.FragmentFavoriteMovie;
+import com.example.hellogit.fragment.FragFavMovie;
 
-public class ViewPageAdapter extends FragmentPagerAdapter {
+public class ViewPageAdapt extends FragmentPagerAdapter {
 
     private final Fragment[] tabFragments;
 
-    public ViewPageAdapter(FragmentManager fragmentManager) {
+    public ViewPageAdapt(FragmentManager fragmentManager) {
         super(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         tabFragments = new Fragment[]{
-                new FragmentFavoriteMovie(),
+                new FragFavMovie(),
         };
     }
 

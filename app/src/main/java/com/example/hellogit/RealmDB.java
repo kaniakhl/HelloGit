@@ -1,25 +1,20 @@
-package com.example.hellogit.realm;
+package com.example.hellogit;
+
+import io.realm.RealmResults;
+import java.util.ArrayList;
 
 import android.content.Context;
 
-import com.example.hellogit.model.ModelMovie;
-
-import java.util.ArrayList;
-
-import io.realm.Realm;
-import io.realm.RealmResults;
-
-
-public class RealmHelper {
+public class RealmDB {
 
     private Context mContext;
-    private Realm realm;
+    private io.realm.Realm realm;
     private RealmResults<ModelMovie> modelMovie;
 
-    public RealmHelper(Context mContext) {
+    public RealmDB(Context mContext) {
         this.mContext = mContext;
-        Realm.init(mContext);
-        realm = Realm.getDefaultInstance();
+        io.realm.Realm.init(mContext);
+        realm = io.realm.Realm.getDefaultInstance();
     }
 
     public ArrayList<ModelMovie> showFavoriteMovie() {
@@ -31,7 +26,7 @@ public class RealmHelper {
                 ModelMovie movie = new ModelMovie();
                 movie.setId(modelMovie.get(i).getId());
                 movie.setTitle(modelMovie.get(i).getTitle());
-                movie.setVoteAverage(modelMovie.get(i).getVoteAverage());
+                movie.setVoteAvg(modelMovie.get(i).getVoteAvg());
                 movie.setOverview(modelMovie.get(i).getOverview());
                 movie.setReleaseDate(modelMovie.get(i).getReleaseDate());
                 movie.setPosterPath(modelMovie.get(i).getPosterPath());
@@ -49,7 +44,7 @@ public class RealmHelper {
         ModelMovie movie = new ModelMovie();
         movie.setId(Id);
         movie.setTitle(Title);
-        movie.setVoteAverage(VoteAverage);
+        movie.setVoteAvg(VoteAverage);
         movie.setOverview(Overview);
         movie.setReleaseDate(ReleaseDate);
         movie.setPosterPath(PosterPath);
@@ -59,18 +54,13 @@ public class RealmHelper {
         realm.beginTransaction();
         realm.copyToRealm(movie);
         realm.commitTransaction();
-
-        //Toast.makeText(mContext, "Data berhasil ditambah", Toast.LENGTH_SHORT).show();
     }
-
 
     public void deleteFavoriteMovie(int id) {
         realm.beginTransaction();
         RealmResults<ModelMovie> modelMovie = realm.where(ModelMovie.class).findAll();
         modelMovie.deleteAllFromRealm();
         realm.commitTransaction();
-
-        //Toast.makeText(mContext, "Data berhasil dihapus", Toast.LENGTH_SHORT).show();
     }
 
 

@@ -1,36 +1,36 @@
 package com.example.hellogit.activities;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
-import android.content.Intent;
 import android.graphics.Color;
-import android.os.Build;
-import android.os.Bundle;
-import android.view.MenuItem;
+import android.content.Intent;
 import android.view.View;
-import android.view.Window;
+import android.os.Bundle;
 import android.view.WindowManager;
-import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.TextView;
+import android.view.MenuItem;
+import android.view.Window;
+import android.widget.ImageView;
+import android.app.ProgressDialog;
+import android.os.Build;
+import android.widget.RatingBar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.Glide;
+import com.example.hellogit.ApiEndpoint;
+import com.example.hellogit.ModelMovie;
+import com.example.hellogit.RealmDB;
 import com.example.hellogit.R;
-import com.example.hellogit.model.ModelMovie;
-import com.example.hellogit.networking.ApiEndpoint;
-import com.example.hellogit.realm.RealmHelper;
-import com.github.ivbaranov.mfb.MaterialFavoriteButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.github.ivbaranov.mfb.MaterialFavoriteButton;
 
-public class DetailMovieActivity extends AppCompatActivity {
+public class DetailActivity extends AppCompatActivity {
 
     Toolbar toolbar;
-    TextView tvTitle, tvName, tvRating, tvRelease, tvPopularity, tvOverview;
+    TextView Title, tvName, tvRating, tvRelease, tvPopularity, tvOverview;
     ImageView imgCover, imgPhoto;
     MaterialFavoriteButton imgFavorite;
     FloatingActionButton fabShare;
@@ -40,7 +40,7 @@ public class DetailMovieActivity extends AppCompatActivity {
     double Rating;
     ModelMovie modelMovie;
     ProgressDialog progressDialog;
-    RealmHelper helper;
+    RealmDB helper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +69,7 @@ public class DetailMovieActivity extends AppCompatActivity {
         imgCover = findViewById(R.id.imgCover);
         imgPhoto = findViewById(R.id.imgPhoto);
         imgFavorite = findViewById(R.id.imgFavorite);
-        tvTitle = findViewById(R.id.tvTitle);
+        Title = findViewById(R.id.tvTitle);
         tvName = findViewById(R.id.tvName);
         tvRating = findViewById(R.id.tvRating);
         tvRelease = findViewById(R.id.tvRelease);
@@ -77,28 +77,28 @@ public class DetailMovieActivity extends AppCompatActivity {
         tvOverview = findViewById(R.id.tvOverview);
         fabShare = findViewById(R.id.fabShare);
 
-        helper = new RealmHelper(this);
+        helper = new RealmDB(this);
 
         modelMovie = (ModelMovie) getIntent().getSerializableExtra("detailMovie");
         if (modelMovie != null) {
 
             Id = modelMovie.getId();
             NameFilm = modelMovie.getTitle();
-            Rating = modelMovie.getVoteAverage();
             ReleaseDate = modelMovie.getReleaseDate();
             Popularity = modelMovie.getPopularity();
-            Overview = modelMovie.getOverview();
+            Rating = modelMovie.getVoteAvg();
+            movieURL = ApiEndpoint.URLFILM + "" + Id;
             Cover = modelMovie.getBackdropPath();
             Thumbnail = modelMovie.getPosterPath();
-            movieURL = ApiEndpoint.URLFILM + "" + Id;
+            Overview = modelMovie.getOverview();
 
-            tvTitle.setText(NameFilm);
+            Title.setText(NameFilm);
             tvName.setText(NameFilm);
             tvRating.setText(Rating + "/10");
             tvRelease.setText(ReleaseDate);
             tvPopularity.setText(Popularity);
             tvOverview.setText(Overview);
-            tvTitle.setSelected(true);
+            Title.setSelected(true);
             tvName.setSelected(true);
 
             float newValue = (float)Rating;
@@ -124,7 +124,7 @@ public class DetailMovieActivity extends AppCompatActivity {
                         if (favorite) {
                             Id = modelMovie.getId();
                             NameFilm = modelMovie.getTitle();
-                            Rating = modelMovie.getVoteAverage();
+                            Rating = modelMovie.getVoteAvg();
                             Overview = modelMovie.getOverview();
                             ReleaseDate = modelMovie.getReleaseDate();
                             Thumbnail = modelMovie.getPosterPath();
@@ -158,6 +158,15 @@ public class DetailMovieActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            this.finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     public static void setWindowFlag(Activity activity, final int bits, boolean on) {
         Window window = activity.getWindow();
         WindowManager.LayoutParams winParams = window.getAttributes();
@@ -167,15 +176,6 @@ public class DetailMovieActivity extends AppCompatActivity {
             winParams.flags &= ~bits;
         }
         window.setAttributes(winParams);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            this.finish();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
 }
