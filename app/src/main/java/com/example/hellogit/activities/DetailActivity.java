@@ -1,31 +1,31 @@
 package com.example.hellogit.activities;
 
 import android.app.Activity;
-import android.graphics.Color;
-import android.content.Intent;
-import android.view.View;
-import android.os.Bundle;
-import android.view.WindowManager;
-import android.widget.TextView;
-import android.view.MenuItem;
-import android.view.Window;
-import android.widget.ImageView;
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
+import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.RatingBar;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.hellogit.ApiEndpoint;
 import com.example.hellogit.ModelMovie;
-import com.example.hellogit.RealmDB;
 import com.example.hellogit.R;
+import com.example.hellogit.RealmDB;
+import com.github.ivbaranov.mfb.MaterialFavoriteButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
-import com.github.ivbaranov.mfb.MaterialFavoriteButton;
 
 public class DetailActivity extends AppCompatActivity {
 
